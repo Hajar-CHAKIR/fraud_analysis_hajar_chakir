@@ -6,7 +6,7 @@ import plotly.express as px
 st.title("Analyse des transactions bancaires - Détection de fraude")
 
 # Chargement du dataset
-df = pd.read_csv("creditcard_sample.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/creditcard.csv")
 
 st.write(f"Nombre de lignes : {df.shape[0]} - Nombre de colonnes : {df.shape[1]}")
 
