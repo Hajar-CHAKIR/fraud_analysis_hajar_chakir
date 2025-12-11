@@ -93,11 +93,16 @@ fig_scatter = px.scatter(
     x="Time",
     y="Amount",
     color="Class",
+    color_discrete_map={
+        0: "#4a4a4a",   # gris foncé
+        1: "#d62728"    # rouge pour bien distinguer la fraude
+    },
     log_y=True,
     labels={"Time": "Temps (sec)", "Amount": "Montant (€)", "Class": "Classe"},
     title="Time vs Amount (échantillon)"
 )
 st.plotly_chart(fig_scatter, use_container_width=True)
+
 
 st.markdown("""
 ### Interprétation  
@@ -121,13 +126,15 @@ st.write(f"**Nombre de transactions normales :** {len(nonfraud)}")
 st.subheader("Comparaison des montants (fraudes vs non-fraudes)")
 fig_fraud = px.box(df, x="Class", y="Amount", log_y=True,
                    labels={"Class": "Classe", "Amount": "Montant (€)"})
-st.plotly_chart(fig_fraud, use_container_width=True)
+st.plotly_chart(fig_fraud, use_container_width=True, key="fraud_boxplot")
 
 st.markdown("""
 ### Analyse  
 Les transactions frauduleuses montrent davantage d'outliers 
-et une variabilité plus forte, ce qui en fait un indicateur utile pour détecter des anomalies.
+et une variabilité plus forte, ce qui en fait un indicateur utile
+pour détecter des anomalies.
 """)
+
 
 st.markdown("---")
 
