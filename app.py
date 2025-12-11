@@ -1,4 +1,4 @@
-import streamlit as st 
+import streamlit as st  
 import pandas as pd
 import plotly.express as px
 import zipfile
@@ -67,7 +67,7 @@ st.subheader("Histogramme interactif du montant des transactions")
 fig_hist = px.histogram(df, x="Amount", nbins=80,
                         labels={"Amount": "Montant (€)"},
                         title="Distribution des montants")
-st.plotly_chart(fig_hist, use_container_width=True)
+st.plotly_chart(fig_hist, use_container_width=True, key="hist")
 
 st.markdown("""
 ### Interprétation  
@@ -81,8 +81,10 @@ Ce comportement est typique des données financières et justifie l'usage d'éch
 # Boxplot
 st.subheader("Boxplot du montant selon la classe")
 fig_box = px.box(df, x="Class", y="Amount", log_y=True,
-                 labels={"Class": "Classe", "Amount": "Montant (€)"})
-st.plotly_chart(fig_box, use_container_width=True)
+                 labels={"Class": "Classe", "Amount": "Montant (€)"},
+                 color="Class",
+                 color_discrete_map={0: "#4A90E2", 1: "#D0021B"})
+st.plotly_chart(fig_box, use_container_width=True, key="box")
 
 st.markdown("""
 ### Interprétation  
@@ -98,15 +100,14 @@ fig_scatter = px.scatter(
     y="Amount",
     color="Class",
     color_discrete_map={
-        0: "#E96320",  
-        1: "#20A6E9"   
+        0: "#4A4A4A",   # gris foncé (non fraude)
+        1: "#E63946"    # rouge vif (fraude)
     },
     log_y=True,
     labels={"Time": "Temps (sec)", "Amount": "Montant (€)", "Class": "Classe"},
     title="Time vs Amount (échantillon)"
 )
-st.plotly_chart(fig_scatter, use_container_width=True)
-
+st.plotly_chart(fig_scatter, use_container_width=True, key="scatter")
 
 st.markdown("""
 ### Interprétation  
@@ -129,8 +130,10 @@ st.write(f"**Nombre de transactions normales :** {len(nonfraud)}")
 
 st.subheader("Comparaison des montants (fraudes vs non-fraudes)")
 fig_fraud = px.box(df, x="Class", y="Amount", log_y=True,
-                   labels={"Class": "Classe", "Amount": "Montant (€)"})
-st.plotly_chart(fig_fraud, use_container_width=True, key="fraud_boxplot")
+                   labels={"Class": "Classe", "Amount": "Montant (€)"},
+                   color="Class",
+                   color_discrete_map={0: "#4A90E2", 1: "#D0021B"})
+st.plotly_chart(fig_fraud, use_container_width=True, key="fraud")
 
 st.markdown("""
 ### Analyse  
@@ -138,7 +141,6 @@ Les transactions frauduleuses montrent davantage d'outliers
 et une variabilité plus forte, ce qui en fait un indicateur utile
 pour détecter des anomalies.
 """)
-
 
 st.markdown("---")
 
