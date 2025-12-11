@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+
+with zipfile.ZipFile("creditcard.zip") as z:
+    with z.open("creditcard.csv") as f:
+        df = pd.read_csv(f)
+
+# Échantillon pour les graphes lourds
+sample_df = df.sample(5000, random_state=42)
+
+
 # Sidebar navigation
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
