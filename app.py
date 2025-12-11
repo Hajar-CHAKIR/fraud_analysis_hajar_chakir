@@ -5,8 +5,13 @@ import plotly.express as px
 # Titre de l'application
 st.title("Analyse des transactions bancaires - Détection de fraude")
 
-# Chargement du dataset
-df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/creditcard.csv")
+import zipfile
+import pandas as pd
+
+# Lire le fichier ZIP dans GitHub
+with zipfile.ZipFile("creditcard.zip") as z:
+    with z.open("creditcard.csv") as f:
+        df = pd.read_csv(f)
 
 st.write(f"Nombre de lignes : {df.shape[0]} - Nombre de colonnes : {df.shape[1]}")
 
