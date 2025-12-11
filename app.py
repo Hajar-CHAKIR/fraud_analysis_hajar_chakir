@@ -10,8 +10,12 @@ with zipfile.ZipFile("creditcard.zip") as z:
     with z.open("creditcard.csv") as f:
         df = pd.read_csv(f)
 
+# Convertir Class en int pour garantir de bonnes couleurs
+df["Class"] = df["Class"].astype(int)
+
 # Échantillon pour les graphes lourds
 sample_df = df.sample(5000, random_state=42)
+sample_df["Class"] = sample_df["Class"].astype(int)
 
 # -----------------------------
 # Sidebar (navigation facultative)
