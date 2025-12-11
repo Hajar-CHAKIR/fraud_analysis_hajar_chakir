@@ -94,8 +94,8 @@ fig_scatter = px.scatter(
     y="Amount",
     color="Class",
     color_discrete_map={
-        0: "#40DFFF",   # gris foncé
-        1: "#003AAD"    # rouge pour bien distinguer la fraude
+        0: "#A9E920",  
+        1: "#003AAD"   
     },
     log_y=True,
     labels={"Time": "Temps (sec)", "Amount": "Montant (€)", "Class": "Classe"},
