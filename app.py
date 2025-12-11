@@ -94,8 +94,8 @@ fig_scatter = px.scatter(
     y="Amount",
     color="Class",
     color_discrete_map={
-        0: "#A9E920",  
-        1: "#003AAD"   
+        0: "#E96320",  
+        1: "#20A6E9"   
     },
     log_y=True,
     labels={"Time": "Temps (sec)", "Amount": "Montant (€)", "Class": "Classe"},
